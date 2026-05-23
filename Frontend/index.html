@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>Owner Tracker</title>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <header class="header">
+    <h1>Owner Tracker</h1>
+
+    <nav>
+      <a href="index.html">Today</a>
+      <a href="goals.html">Goals</a>
+      <a href="history.html">History</a>
+    </nav>
+  </header>
+
+  <div class="card">
+
+    <h2>Today Journey</h2>
+
+    <textarea
+      id="diaryText"
+      placeholder="วันนี้เป็นยังไง เขียนอะไรก็ได้..."
+    ></textarea>
+
+    <h2>สิ่งที่ทำสำเร็จวันนี้</h2>
+
+    <textarea
+      id="doneText"
+      placeholder="วันนี้ทำอะไรสำเร็จบ้าง..."
+    ></textarea>
+
+    <button onclick="saveToday()">
+      Save Today
+    </button>
+
+    <p id="saveStatus"></p>
+
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>

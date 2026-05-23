@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>History</title>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <header class="header">
+
+    <div>
+      <h1>History</h1>
+      <p class="subtitle">
+        ย้อนดูว่าแต่ละวันกูเป็นยังไง
+      </p>
+    </div>
+
+    <nav>
+      <a href="index.html">Today</a>
+      <a href="goals.html">Goals</a>
+      <a href="history.html">History</a>
+    </nav>
+
+  </header>
+
+  <div class="card">
+
+    <div id="entries"></div>
+
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/render.js"></script>
+
+  <script>
+    async function loadEntries() {
+
+      const data = await getEntries();
+
+      renderEntries(data.entries);
+    }
+
+    loadEntries();
+  </script>
+
+</body>
+</html>

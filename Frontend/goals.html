@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>Goals</title>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <header class="header">
+
+    <h1>Goals</h1>
+
+    <nav>
+      <a href="index.html">Today</a>
+      <a href="goals.html">Goals</a>
+      <a href="history.html">History</a>
+    </nav>
+
+  </header>
+
+  <div class="card">
+
+    <div id="goals"></div>
+
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/render.js"></script>
+
+  <script>
+    async function loadGoals() {
+      const data = await getGoals();
+      renderGoals(data.goals);
+    }
+
+    loadGoals();
+  </script>
+
+</body>
+</html>

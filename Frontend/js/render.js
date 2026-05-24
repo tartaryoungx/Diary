@@ -31,7 +31,6 @@ function renderGoals(goals) {
       div.innerHTML = `
         <div class="goal-title">${goal.title}</div>
         <div class="goal-desc">${goal.description || ""}</div>
-        <div class="goal-date">Created: ${createdDate}</div>
       `;
 
       goalsDiv.appendChild(div);

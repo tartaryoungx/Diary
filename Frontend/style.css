@@ -180,3 +180,34 @@ nav a:hover {
   margin-bottom: 20px;
   line-height: 1.6;
 }
+
+.objective-box {
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.objective-label {
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: #888;
+}
+
+.objective-box h2 {
+  margin-top: 6px;
+  margin-bottom: 14px;
+  font-size: 28px;
+}
+
+.objective-main {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.objective-sub {
+  color: #666;
+  line-height: 1.7;
+  max-width: 700px;
+}

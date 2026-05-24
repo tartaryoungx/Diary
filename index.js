@@ -7,6 +7,9 @@ const app = express();
 const port = 8000;
 const dbport = 8081;
 const USER_ID = "11111111-1111-1111-1111-111111111111"
+const today = new Date().toLocaleDateString("en-CA", {
+  timeZone: "Asia/Bangkok",
+});
 
 app.use(cors({
   origin: "http://127.0.0.1:5500",
@@ -55,8 +58,8 @@ app.get("/api/goals", async (req, res) => {
 app.get("/api/today", async (req, res) => {
   try {
     const [entries] = await conn.query(
-      "SELECT * FROM daily_entries WHERE user_id = ? AND entry_date = CURDATE()",
-      [USER_ID]
+      "SELECT * FROM daily_entries WHERE user_id = ? AND entry_date = ?",
+      [USER_ID, today]
     );
 
     res.json({
@@ -81,14 +84,14 @@ app.post("/api/today", async (req, res) => {
     }
 
     const [existingEntry] = await conn.query(
-      "SELECT * FROM daily_entries WHERE user_id = ? AND entry_date = CURDATE()",
-      [USER_ID]
+      "SELECT * FROM daily_entries WHERE user_id = ? AND entry_date  = ?",
+      [USER_ID, today]
     );
 
     if (existingEntry.length > 0) {
       await conn.query(
-        "UPDATE daily_entries SET diary_text = ?, done_text = ? WHERE user_id = ? AND entry_date = CURDATE()",
-        [diary_text, done_text, USER_ID]
+        "UPDATE daily_entries SET diary_text = ?, done_text = ? WHERE user_id = ? AND entry_date = ?",
+        [diary_text, done_text, USER_ID, today]
       );
 
       return res.json({
@@ -97,14 +100,15 @@ app.post("/api/today", async (req, res) => {
     }
 
     await conn.query(
-        "INSERT INTO daily_entries (id, user_id, entry_date, diary_text, done_text) VALUES (?, ?, CURDATE(), ?, ?)",
-        [uuidv4(), USER_ID, diary_text, done_text]
+        "INSERT INTO daily_entries (id, user_id, entry_date, diary_text, done_text) VALUES (?, ?, ?, ?, ?)",
+        [uuidv4(), USER_ID, today, diary_text, done_text]
     );
 
     res.json({
       message: "Today diary created",
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       message: "Save today failed",
       error: error.message,
@@ -125,7 +129,7 @@ app.get("/api/entries", async (req, res) => {
   } catch (error) {
     res.status(500).json({
       message: "Get entries failed",
-      error: error.message,
+      error: error.message
     });
   }
 });

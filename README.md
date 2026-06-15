@@ -7,5 +7,3 @@ For track my own Journey
 docker-compose up -d
 npm run dev
 3. Right click index.html -> Open Live Server 
-
-เติมไฟฮ้าฟ

@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meta Experiment Tracker</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f5;
+        margin: 0;
+        padding: 24px;
+        color: #111827;
+      }
+
+      .container {
+        max-width: 760px;
+        margin: 0 auto;
+      }
+
+      .card {
+        background: white;
+        border-radius: 18px;
+        padding: 24px;
+        margin-bottom: 20px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      }
+
+      h1,
+      h2 {
+        margin-top: 0;
+      }
+
+      .metric {
+        margin-bottom: 18px;
+      }
+
+      label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      select,
+      input,
+      textarea {
+        width: 100%;
+        padding: 12px;
+        border-radius: 12px;
+        border: 1px solid #d1d5db;
+        font-size: 15px;
+        box-sizing: border-box;
+      }
+
+      textarea {
+        min-height: 90px;
+        resize: vertical;
+      }
+
+      .score-box {
+        font-size: 36px;
+        font-weight: bold;
+        margin: 16px 0;
+      }
+
+      button {
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 14px;
+        background: #111827;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      button:hover {
+        opacity: 0.9;
+      }
+
+      .log {
+        border-top: 1px solid #e5e7eb;
+        padding: 14px 0;
+      }
+
+      .log:first-child {
+        border-top: none;
+      }
+
+      .log-date {
+        font-weight: bold;
+      }
+
+      .log-score {
+        font-size: 24px;
+        font-weight: bold;
+        margin: 6px 0;
+      }
+
+      .delete-btn {
+        background: #dc2626;
+        margin-top: 8px;
+        padding: 8px;
+        font-size: 13px;
+      }
+
+      .small {
+        color: #6b7280;
+        font-size: 14px;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        margin-bottom: 20px;
+      }
+
+      nav {
+        display: flex;
+        gap: 12px;
+      }
+
+      nav a {
+        text-decoration: none;
+
+        color: #1c1c1e;
+
+        padding: 8px 14px;
+
+        border: 1px solid #ddd;
+        border-radius: 10px;
+
+        background: white;
+      }
+
+      nav a:hover {
+        background: #f0f0f0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="header">
+      <h1>Owner Tracker</h1>
+
+      <nav>
+        <a href="../index.html">Today</a>
+        <a href="../history.html">History</a>
+        <a href="../direction/direction.html">Direction</a>
+        <a href="../timer/timer.html">Timer</a>
+      </nav>
+    </header>
+    <div class="container">
+      <p>
+        metric ที่ดีที่สุดมักจะวัดสิ่งที่มึงแคร์จริง ๆ
+        ไม่ใช่วัดกลไกที่อยู่ก่อนหน้า
+      </p>
+      <div class="card">
+        <h1>Meta Experiment Tracker</h1>
+        <p class="small">วัดว่า “วันนี้ชีวิตกลับมาใช้งานได้มากขึ้นไหม”</p>
+
+        <form id="logForm">
+          <div class="metric">
+            <label>Date</label>
+            <input type="date" id="log_date" required />
+          </div>
+
+          <div class="metric">
+            <label>Code Initiation — เขียนโค้ดแม้ไม่อยาก</label>
+            <select id="code_score">
+              <option value="0">0 = ไม่เริ่ม</option>
+              <option value="1">1 = เริ่มได้แม้ไม่อยาก ครึ่ง - 2 ชม </option>
+              <option value="2">2 = ทำได้ตามเวลาที่ตั้งไว้ 3-4 ชม </option>
+            </select>
+          </div>
+
+          <div class="metric">
+            <label
+              >Present With People — อยู่กับคนตรงหน้า (ที่ไม่ใช่ครอบครัว)</label
+            >
+            <select id="people_score">
+              <option value="0">0 = ฟังแทบไม่ได้</option>
+              <option value="1">1 = ฟังได้บางช่วง</option>
+              <option value="2">2 = ฟังได้ส่วนใหญ่</option>
+            </select>
+          </div>
+
+          <div class="metric">
+            <label>Exercise — สัปดาห์ที่ผ่านมาออกกำลังกายตามแผนไหม</label>
+            <select id="exercise_score">
+              <option value="0">0 = ไม่ได้ทำเลย / หลุดจากแผน</option>
+              <option value="1">1 = ทำบ้าง แต่ยังไม่ถึงแผน</option>
+              <option value="2">2 = ทำได้ตามแผนของสัปดาห์</option>
+            </select>
+          </div>
+
+          <div class="metric">
+            <label>Valorant — เล่นแบบไม่โดนเกมลากชีวิต</label>
+            <select id="valorant_score">
+              <option value="0">0 = เล่นเกิน / tilt / เสียการใช้ชีวิต</option>
+              <option value="1">1 = เล่น แต่ยังพอคุมได้บางส่วน</option>
+              <option value="2">
+                2 = เล่นตามขอบเขตที่ตั้งไว้ หรือไม่เล่นเพราะเลือกได้
+              </option>
+            </select>
+          </div>
+
+          <div class="metric">
+            <label>Important Thing of the Day — สิ่งสำคัญของวันนี้</label>
+            <select id="important_score">
+              <option value="0">0 = หลีกหนี</option>
+              <option value="1">1 = แตะบ้าง</option>
+              <option value="2">2 = ทำจริง</option>
+            </select>
+          </div>
+
+          <div class="metric">
+            <label>Note</label>
+            <textarea
+              id="note"
+              placeholder="วันนี้เกิดอะไรขึ้น / อะไรลากกู / อะไรช่วยให้กลับมา"
+            ></textarea>
+          </div>
+
+          <div class="score-box">Total: <span id="totalScore">0</span>/10</div>
+
+          <button type="submit">Save Today Log</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2>Logs</h2>
+        <div id="logs"></div>
+      </div>
+    </div>
+
+    <script>
+      const API_URL = "http://localhost:8001/api/logs";
+
+      const form = document.getElementById("logForm");
+      const logsDiv = document.getElementById("logs");
+
+      const inputs = [
+        "code_score",
+        "people_score",
+        "exercise_score",
+        "valorant_score",
+        "important_score",
+      ];
+
+      document.getElementById("log_date").valueAsDate = new Date();
+
+      inputs.forEach((id) => {
+        document.getElementById(id).addEventListener("change", updateTotal);
+      });
+
+      function updateTotal() {
+        const total = inputs.reduce((sum, id) => {
+          return sum + Number(document.getElementById(id).value);
+        }, 0);
+
+        document.getElementById("totalScore").textContent = total;
+      }
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const data = {
+          log_date: document.getElementById("log_date").value,
+          code_score: Number(document.getElementById("code_score").value),
+          people_score: Number(document.getElementById("people_score").value),
+          exercise_score: Number(
+            document.getElementById("exercise_score").value,
+          ),
+          valorant_score: Number(
+            document.getElementById("valorant_score").value,
+          ),
+          important_score: Number(
+            document.getElementById("important_score").value,
+          ),
+          note: document.getElementById("note").value,
+        };
+
+        await fetch(API_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+
+        form.reset();
+        document.getElementById("log_date").valueAsDate = new Date();
+        updateTotal();
+        loadLogs();
+      });
+
+      async function loadLogs() {
+        const res = await fetch(API_URL);
+        const logs = await res.json();
+
+        logsDiv.innerHTML = "";
+
+        logs.forEach((log) => {
+          const div = document.createElement("div");
+          div.className = "log";
+
+          div.innerHTML = `
+          <div class="log-date">${formatDate(log.log_date)}</div>
+          <div class="log-score">${log.total_score}/10</div>
+          <div class="small">
+            Code: ${log.code_score} |
+            People: ${log.people_score} |
+            Exercise: ${log.exercise_score} |
+            Valorant: ${log.valorant_score} |
+            Important: ${log.important_score}
+          </div>
+          <p>${log.note || ""}</p>
+          <button class="delete-btn" onclick="deleteLog(${log.id})">Delete</button>
+        `;
+
+          logsDiv.appendChild(div);
+        });
+      }
+
+      async function deleteLog(id) {
+        await fetch(`${API_URL}/${id}`, {
+          method: "DELETE",
+        });
+
+        loadLogs();
+      }
+
+      function formatDate(dateString) {
+        return new Date(dateString).toLocaleDateString("th-TH");
+      }
+
+      updateTotal();
+      loadLogs();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Return To Work Timer</title>
+    <link rel="stylesheet" href="timer.css" />
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="logo">Return To Work</div>
+
+      <nav>
+        <a href="../index.html">Today</a>
+        <a href="../direction/direction.html">Direction</a>
+        <a href="../history.html">History</a>
+        <a href="../metrix/metrix.html">Metrix</a>
+      </nav>
+    </header>
+
+    <h1>Today's Blocks</h1>
+
+    <div class="return-counter">
+      <h2>Returns</h2>
+      <div class="return-number" id="returnCount">0</div>
+      <button onclick="addReturn()">+ I Came Back</button>
+      <button onclick="resetReturn()">Reset</button>
+    </div>
+
+    <div class="card">
+      <h2>Code</h2>
+      <input type="number" id="codeMinutes" value="240" />
+      <button onclick="setTimerMinutes('code')">Set Minutes</button>
+
+      <div class="time" id="time-code">04:00:00</div>
+      <button onclick="startTimer('code')">Start</button>
+      <button onclick="pauseTimer('code')">Pause</button>
+      <button onclick="resetTimer('code')">Reset</button>
+
+      <label>
+        <input type="checkbox" id="codeSuccess" />
+        Success
+      </label>
+    </div>
+
+    <div class="card">
+      <h2>Valorant</h2>
+      <input type="number" id="valoMinutes" value="60" />
+      <button onclick="setTimerMinutes('valo')">Set Minutes</button>
+
+      <div class="time" id="time-valo">01:00:00</div>
+      <button onclick="startTimer('valo')">Start</button>
+      <button onclick="pauseTimer('valo')">Pause</button>
+      <button onclick="resetTimer('valo')">Reset</button>
+
+      <label>
+        <input type="checkbox" id="valoSuccess" />
+        Success
+      </label>
+    </div>
+
+    <div class="card">
+      <h2>Workout</h2>
+      <input type="number" id="workoutMinutes" value="60" />
+      <button onclick="setTimerMinutes('workout')">Set Minutes</button>
+
+      <div class="time" id="time-workout">01:00:00</div>
+      <button onclick="startTimer('workout')">Start</button>
+      <button onclick="pauseTimer('workout')">Pause</button>
+      <button onclick="resetTimer('workout')">Reset</button>
+
+      <label>
+        <input type="checkbox" id="workoutSuccess" />
+        Success
+      </label>
+
+      <label>
+        <input type="checkbox" id="progressiveOverload" />
+        Progressive Overload
+      </label>
+    </div>
+
+    <div class="card">
+      <h2>Save Log</h2>
+      <button onclick="saveTimerLog()">Save Timer Log</button>
+    </div>
+
+    <div class="card">
+      <h2>Timer Logs</h2>
+      <div id="timerLogs"></div>
+    </div>
+
+    <script src="timer.js"></script>
+  </body>
+</html>
